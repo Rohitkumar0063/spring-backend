@@ -20,12 +20,7 @@ public class BackendApplication {
 				.ignoreIfMissing()
 				.load();
 
-// Map env to Spring property
-		System.setProperty("spring.data.mongodb.uri", dotenv.get("SPRING_DATA_MONGODB_URI"));
-		System.setProperty("server.port", dotenv.get("PORT"));
 
-		System.out.println("✅ Mongo URI loaded: " + System.getProperty("spring.data.mongodb.uri"));
-		System.out.println("✅ Port: " + System.getProperty("server.port"));
 
 
 		// Start Spring Boot
