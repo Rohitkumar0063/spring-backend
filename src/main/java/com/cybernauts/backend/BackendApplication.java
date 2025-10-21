@@ -26,6 +26,8 @@ public class BackendApplication {
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
+		System.out.println("✅ Global CORS config initialized");
+
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(@NotNull CorsRegistry registry) {
@@ -35,6 +37,7 @@ public class BackendApplication {
 								"https://playful-arithmetic-5db94a.netlify.app",
 								"https://*.netlify.app" // wildcard subdomains for Netlify
 						)
+						.allowedOriginPatterns("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowedHeaders("*")
 						.allowCredentials(true);
