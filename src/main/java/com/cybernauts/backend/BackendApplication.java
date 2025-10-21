@@ -30,11 +30,16 @@ public class BackendApplication {
 			@Override
 			public void addCorsMappings(@NotNull CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:3000", "https://playful-arithmetic-5db94a.netlify.app")
-						.allowedMethods("GET", "POST", "PUT", "DELETE")
+						.allowedOrigins(
+								"http://localhost:3000",
+								"https://playful-arithmetic-5db94a.netlify.app",
+								"https://*.netlify.app" // wildcard subdomains for Netlify
+						)
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowedHeaders("*")
 						.allowCredentials(true);
 			}
 		};
 	}
+
 }
