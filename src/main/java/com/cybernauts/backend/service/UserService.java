@@ -37,11 +37,9 @@ public class UserService {
     return repository.findAll();
   }
 
-  //public User put(ObjectId id, User user) {
-  //}
-
   public void deleteById(ObjectId id) {
-    User user = repository.findById(id).orElseThrow();
+    User user = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));;
     if(!user.getFriends().isEmpty()){
       System.out.println("First need to unlink it .....unlinking");
       for(ObjectId friendId: user.getFriends()){

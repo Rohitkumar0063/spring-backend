@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@CrossOrigin(origins = "http://192.168.1.2:3000")
+
 
 @RestController
 @RequestMapping("/users")
@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private RelationService relationService;
 
-    @GetMapping("/")
+    @GetMapping({"","/"})
     public List<User> fetchAllUser() {
         return service.findAlll();
     }
@@ -57,10 +57,10 @@ public class UserController {
    //3rd
    @PutMapping("/updated/{id}")
    public ResponseEntity<User> updateUser(@PathVariable ObjectId id, @RequestBody User newEntry){
-            User old= (User) service.findByID(id).orElse(null);
-            if(old!= null && newEntry!=null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+       User old = service.findByID(id).orElse(null);
+       if(old == null || newEntry == null) {  // FIXED LOGIC
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
 
             if (newEntry.getUsername() != null && !newEntry.getUsername().isEmpty()) {
                 old.setUsername(newEntry.getUsername());
@@ -79,7 +79,9 @@ public class UserController {
                 }
             old.setPopularityScore(service.calculatePopularity(id));
 
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            service.saveUser(old);
+
+            return new ResponseEntity<>(old,HttpStatus.OK);
 
    }
 
