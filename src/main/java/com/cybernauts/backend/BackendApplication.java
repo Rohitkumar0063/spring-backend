@@ -30,7 +30,7 @@ public class BackendApplication {
 			@Override
 			public void addCorsMappings(@NotNull CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:3000", "https://your-actual-app.netlify.app")
+						.allowedOrigins("http://localhost:3000", "https://playful-arithmetic-5db94a.netlify.app")
 						.allowedMethods("GET", "POST", "PUT", "DELETE")
 						.allowedHeaders("*")
 						.allowCredentials(true);
